@@ -1,7 +1,7 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 
-const PAGES = ['/', '/#/chapter/er', '/#/lesson/er-3', '/#/lesson/er-7', '/#/lab/er', '/#/lab/mapping', '/#/lab/algebra', '/#/lab/sql', '/#/glossary']
+const PAGES = ['/', '/#/chapter/er', '/#/lesson/er-3', '/#/lesson/er-7', '/#/lesson/rm-2', '/#/lesson/rm-3', '/#/lesson/rm-4', '/#/lesson/ra-1', '/#/lesson/ra-5', '/#/lab/er', '/#/lab/mapping', '/#/lab/algebra', '/#/lab/sql', '/#/glossary']
 
 for (const scheme of ['light', 'dark'] as const) {
   for (const url of PAGES) {

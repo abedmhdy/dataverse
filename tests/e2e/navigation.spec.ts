@@ -56,3 +56,31 @@ test('formulas and code are rendered left-to-right inside RTL pages', async ({ p
   const tableDir = await page.locator('table.rel').first().evaluate((el) => getComputedStyle(el).direction)
   expect(tableDir).toBe('ltr')
 })
+
+const NEW_LESSONS = ['rm-1', 'rm-2', 'rm-3', 'rm-4', 'rm-exam', 'ra-1', 'ra-2', 'ra-3', 'ra-4', 'ra-5', 'ra-6', 'ra-exam']
+for (const id of NEW_LESSONS) {
+  test(`lesson ${id} renders with working examples`, async ({ page }) => {
+    const errors: string[] = []
+    page.on('pageerror', (e) => errors.push(e.message))
+    await page.goto(`/#/lesson/${id}`)
+    await expect(page.getByTestId('mark-done')).toBeVisible()
+    await expect(page.locator('.q').first()).toBeVisible()
+    await expect(page.getByTestId('ra-error')).toHaveCount(0)
+    expect(errors).toEqual([])
+  })
+}
+
+test('integrity actions: Restricted refuses, Cascade deletes children', async ({ page }) => {
+  await page.goto('/#/lesson/rm-2')
+  await page.getByRole('button', { name: 'מחק מחלקה 372' }).click()
+  await expect(page.getByText(/Restricted: המחיקה נדחתה/)).toBeVisible()
+  await page.getByRole('button', { name: 'Cascade', exact: true }).click()
+  await page.getByRole('button', { name: 'מחק מחלקה 372' }).click()
+  await expect(page.getByText(/Cascade: מחלקה 372 נמחקה, ואיתה 2/)).toBeVisible()
+})
+
+test('algebra lesson playground runs an edited expression', async ({ page }) => {
+  await page.goto('/#/lesson/ra-3')
+  await page.getByRole('button', { name: 'R − S' }).first().click()
+  await expect(page.getByTestId('ra-result').first()).toContainText('3 רשומות')
+})

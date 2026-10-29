@@ -22,7 +22,7 @@ export function RelationTable({ rel, title, keptRows, strike, focusRows, keptCol
   const cols = keptCols ? new Set(keptCols) : null
   const rows = rel.rows.slice(0, maxRows)
   return (
-    <div className="rel-wrap">
+    <div className="rel-wrap" tabIndex={0} role="region" aria-label={`טבלה ${title ?? rel.name ?? ""}`}>
       {(title ?? rel.name) && <div className="rel-title">{title ?? rel.name}</div>}
       <table className="rel">
         {caption && <caption className="sr-only">{caption}</caption>}
