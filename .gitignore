@@ -1,0 +1,14 @@
+node_modules
+dist
+coverage
+test-results
+playwright-report
+*.local
+.DS_Store
+# Original course files must never be committed (copyright / course policy)
+course-materials/
+*.pdf
+*.ppt
+*.pptx
+*.doc
+*.docx
