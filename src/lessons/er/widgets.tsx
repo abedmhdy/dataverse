@@ -67,7 +67,7 @@ export function CardinalitySim({
 
   return (
     <Widget title={`סימולטור מופעים: ${relName}`} instr={<>לחצו על מופע מ-{leftName} ואז על מופע מ-{rightName} כדי לחבר (או לנתק) ביניהם. שנו את העוצמה למטה ובדקו אילו חיבורים מפרים אותה.</>}>
-      <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', maxWidth: W, direction: 'ltr', display: 'block', margin: '0 auto' }} role="img" aria-label={`מופעי הקשר ${relName}`}>
+      <svg viewBox={`0 0 ${W} ${H}`} style={{ width: '100%', maxWidth: W, direction: 'ltr', display: 'block', margin: '0 auto' }} role="group" aria-label={`מופעי הקשר ${relName}`}>
         <text x={xl} y={22} textAnchor="middle" style={{ fontWeight: 700, fill: 'var(--er-entity)' }}>{leftName} <tspan style={{ fill: 'var(--er-rel)' }}>({labelL})</tspan></text>
         <text x={xr} y={22} textAnchor="middle" style={{ fontWeight: 700, fill: 'var(--er-entity)' }}>{rightName} <tspan style={{ fill: 'var(--er-rel)' }}>({labelR})</tspan></text>
         {links.map(([i, j], k) => {

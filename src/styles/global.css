@@ -6,14 +6,15 @@
   --text: #1c2033;
   --muted: #5b6178;
   --primary: #4f46e5;
+  --on-primary: #ffffff;
   --primary-soft: #eef0ff;
-  --accent: #0e9f8e;
+  --accent: #08766a;
   --accent-soft: #e3f6f3;
   --warn: #b45309;
   --warn-soft: #fff4e0;
   --bad: #c02646;
   --bad-soft: #fde8ec;
-  --good: #11804b;
+  --good: #0b6b3d;
   --good-soft: #e3f5ea;
   --hl: #fff2a8;
   --er-entity: #4f46e5;
@@ -34,8 +35,9 @@
     --border: #2c3350;
     --text: #e8eaf4;
     --muted: #a3a9c2;
-    --primary: #8b85ff;
-    --primary-soft: #262a52;
+    --primary: #a29dff;
+    --on-primary: #12142a;
+    --primary-soft: #22254a;
     --accent: #3dd6c2;
     --accent-soft: #15302f;
     --warn: #f0b35a;
@@ -110,7 +112,7 @@ main.wide { max-width: 1600px; }
   color: var(--text); padding: 0.45rem 0.9rem; border-radius: 9px; cursor: pointer; font-weight: 500; text-decoration: none; line-height: 1.3;
 }
 .btn:hover { border-color: var(--primary); }
-.btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+.btn.primary { background: var(--primary); border-color: var(--primary); color: var(--on-primary); }
 .btn.primary:hover { filter: brightness(1.08); }
 .btn.ghost { background: transparent; }
 .btn.sm { padding: 0.25rem 0.6rem; font-size: 0.875rem; }
@@ -179,9 +181,9 @@ table.rel th { background: var(--surface-2); font-weight: 600; }
 table.rel th.pk { text-decoration: underline; }
 table.rel td.null { color: var(--muted); font-style: italic; }
 table.rel tr.kept td, table.rel td.kept, table.rel th.kept { background: var(--good-soft); }
-table.rel tr.dropped td { opacity: 0.4; text-decoration: line-through; }
+table.rel tr.dropped td { color: var(--muted); text-decoration: line-through; background: var(--surface-2); }
 table.rel tr.focus td { background: var(--hl); }
-table.rel td.dimcol, table.rel th.dimcol { opacity: 0.35; }
+table.rel td.dimcol, table.rel th.dimcol { color: var(--muted); background: var(--surface-2); }
 .rel-meta { font-size: 0.78rem; color: var(--muted); direction: rtl; text-align: right; margin-top: 0.2rem; }
 
 /* ---------- quiz ---------- */

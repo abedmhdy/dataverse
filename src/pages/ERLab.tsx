@@ -11,7 +11,7 @@ import { loadDraft, saveDraft, useProgress } from '../lib/progress'
 
 function FreeEditor() {
   const [d, setD] = useState<ERDiagram>(() => loadDraft('er.free', SAMPLE_DIAGRAMS[0].build()))
-  useEffect(() => saveDraft('er.free', d), [d])
+  useEffect(() => { saveDraft('er.free', d) }, [d])
   const [key, setKey] = useState(0)
   const load = (nd: ERDiagram) => {
     setD(nd)
@@ -38,7 +38,7 @@ function ExerciseView({ id }: { id: string }) {
   const [showSol, setShowSol] = useState(false)
   const [solD, setSolD] = useState<ERDiagram>(ex.solution)
   const { exercise, progress } = useProgress()
-  useEffect(() => saveDraft(draftKey, d), [d, draftKey])
+  useEffect(() => { saveDraft(draftKey, d) }, [d, draftKey])
   const check = () => {
     const r = checkDiagram(d, ex.spec)
     setResult(r)

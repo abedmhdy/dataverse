@@ -36,7 +36,7 @@ export function ERCanvas({
   const hl = useMemo(() => new Set(highlight), [highlight])
   const bad = useMemo(() => new Set(issueIds), [issueIds])
 
-  useEffect(() => setPendingRel(null), [tool])
+  useEffect(() => { setPendingRel(null) }, [tool])
 
   // Wheel zoom needs a non-passive listener to prevent page scroll.
   useEffect(() => {

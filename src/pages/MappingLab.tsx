@@ -38,7 +38,7 @@ export default function MappingLab() {
   const [active, setActive] = useState<string | null>(null)
   const [hoverRef, setHoverRef] = useState<string | null>(null)
   const [key, setKey] = useState(0)
-  useEffect(() => saveDraft('mapping.diagram', d), [d])
+  useEffect(() => { saveDraft('mapping.diagram', d) }, [d])
   const res = useMemo(() => mapToRelational(d, opt), [d, opt])
   const activeTable = res.tables.find((t) => t.sourceId === active)
   const highlight = active ? [active] : []

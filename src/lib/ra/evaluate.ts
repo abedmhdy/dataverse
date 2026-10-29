@@ -46,6 +46,8 @@ const TITLES: Record<Expr['op'], string> = {
 }
 
 const lc = (s: string) => s.toLowerCase()
+/** Wraps code inside Hebrew explanations in a left-to-right isolate so it is not reordered. */
+const ltr = (s: string) => '⁦' + s + '⁩'
 
 function lookup(env: Record<string, Relation>, name: string): Relation {
   const key = Object.keys(env).find((k) => lc(k) === lc(name))
@@ -205,7 +207,7 @@ class Evaluator {
         r.rows.forEach((row, i) => test(row) && kept.push(i))
         const out: Relation = { columns: r.columns, rows: kept.map((i) => r.rows[i]) }
         return this.push(e, [r], out, { kind: 'select', kept },
-          `עוברים על כל ${r.rows.length} הרשומות ובודקים את התנאי ${condToString(e.cond)}. ` +
+          `עוברים על כל ${r.rows.length} הרשומות ובודקים את התנאי ${ltr(condToString(e.cond))}. ` +
           `${kept.length} רשומות מקיימות אותו ונשארות; ${r.rows.length - kept.length} מסוננות החוצה. התכונות לא משתנות.`)
       }
       case 'project': {
@@ -216,7 +218,7 @@ class Evaluator {
         const out: Relation = { columns: cols.map((i) => r.columns[i]), rows }
         const dup = raw.length - rows.length
         return this.push(e, [r], out, { kind: 'project', cols, duplicatesRemoved: dup },
-          `שומרים רק את העמודות ${cols.map((i) => colLabel(r.columns, i)).join(', ')} ומשליכים את השאר. ` +
+          `שומרים רק את העמודות ${ltr(cols.map((i) => colLabel(r.columns, i)).join(', '))} ומשליכים את השאר. ` +
           (dup > 0
             ? `נוצרו ${dup} רשומות כפולות — π מסיר אותן, כי יחס הוא קבוצה (set).`
             : 'לא נוצרו כפילויות.'))
@@ -267,9 +269,9 @@ class Evaluator {
         }
         return this.push(e, [r], out, { kind: 'aggregate', groups: groups.size },
           (gi.length
-            ? `מקבצים את הרשומות לפי ${gi.map((i) => colLabel(r.columns, i)).join(', ')} — נוצרו ${groups.size} קבוצות. `
+            ? `מקבצים את הרשומות לפי ${ltr(gi.map((i) => colLabel(r.columns, i)).join(', '))} — נוצרו ${groups.size} קבוצות. `
             : 'אין תכונות קיבוץ, לכן כל היחס הוא קבוצה אחת. ') +
-            `לכל קבוצה מחשבים ${e.aggs.map((a) => a.label).join(', ')}. ערכי NULL אינם נספרים.`)
+            `לכל קבוצה מחשבים ${ltr(e.aggs.map((a) => a.label).join(', '))}. ערכי NULL אינם נספרים.`)
       }
       case 'union':
       case 'intersect':
@@ -333,7 +335,7 @@ class Evaluator {
         const out: Relation = { columns, rows: dedupe(rows) }
         return this.push(e, [r, s], out, { kind: 'join', pairs },
           `צירוף = מכפלה קרטזית ואחריה בחירה. מתוך ${r.rows.length * s.rows.length} הצירופים האפשריים, ` +
-            `${pairs.length} מקיימים את תנאי הצירוף ${condToString(e.cond)}.`)
+            `${pairs.length} מקיימים את תנאי הצירוף ${ltr(condToString(e.cond))}.`)
       }
       case 'natural': {
         const r = this.eval(e.left)
@@ -353,7 +355,7 @@ class Evaluator {
         const out: Relation = { columns: [...r.columns, ...sRest.map((k) => s.columns[k])], rows: dedupe(rows) }
         return this.push(e, [r, s], out, { kind: 'join', pairs, common: common.map((c) => c.name) },
           common.length
-            ? `התכונות המשותפות (לפי שם): ${common.map((c) => c.name).join(', ')}. מצרפים רשומות שערכיהן שווים בכולן, ` +
+            ? `התכונות המשותפות (לפי שם): ${ltr(common.map((c) => c.name).join(', '))}. מצרפים רשומות שערכיהן שווים בכולן, ` +
                 `ושומרים עותק אחד מכל תכונה משותפת. ${pairs.length} זוגות מתאימים.`
             : 'אין תכונות בעלות שם משותף — צירוף טבעי במקרה זה שקול למכפלה קרטזית!')
       }
