@@ -3,7 +3,8 @@
 עודכן: 2026-10-29
 
 ## מיקום
-- תיקייה קבועה: `C:\Users\User\Documents\GitHub\dataverse` (Git, ענף `master`, **אין remote ולא בוצע Push**).
+- תיקייה קבועה: `C:\Users\User\Documents\GitHub\dataverse` (Git, ענף `master`).
+- GitHub: **מאגר פרטי** https://github.com/abedmhdy/dataverse — remote `origin`, ענף `master` מסונכרן.
 - הועבר בעזרת `git clone` מתיקיית העבודה הזמנית של Claude. ההעתקה אומתה: אותו HEAD (`42ee8e1`), כל 4 ה-commits, 68 קבצים זהים.
 - תיקיית העבודה הזמנית הישנה **לא נמחקה**. אפשר למחוק אותה (יחד עם הסשן) אחרי שתאשר שהכול תקין כאן.
 - קובצי הקורס המקוריים לא נמצאים במאגר ולא בהיסטוריה (נבדק); אין סודות.
